@@ -458,7 +458,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#engage">Engagement</a></li>
       <li><a href="#cases">Case Studies</a></li>
-      <li><a href="#process" class="nav-cta">Get in Touch</a></li>
+      <li><a href="#" class="nav-cta" onclick="openContact(); return false;">Get in Touch</a></a></li>
     </ul>
     <div class="hamburger" id="hamburger" onclick="toggleNav()">
       <span></span><span></span><span></span>
@@ -881,7 +881,57 @@
     </div>
   </div>
 </footer>
+<!-- POPUP OVERLAY -->
+<div id="contactOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:1000; align-items:center; justify-content:center;">
+  <div style="background:#0f1e35; border:1px solid rgba(26,127,212,0.3); border-radius:16px; padding:48px; width:100%; max-width:520px; margin:20px; position:relative;">
+    
+    <!-- Close Button -->
+    <button onclick="closeContact()" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#8fa4c0; font-size:1.5rem; cursor:pointer;">✕</button>
 
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.8rem; margin-bottom:8px;">Get in Touch</h3>
+    <p style="color:#8fa4c0; font-size:0.9rem; margin-bottom:32px;">Tell us about your project and we'll get back to you within one business day.</p>
+
+    <form action="https://formspree.io/f/xxxxxxxx" method="POST">
+      
+      <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:8px;">Name *</label>
+      <input type="text" name="name" placeholder="Your full name" required
+        style="width:100%; background:#152240; border:1px solid rgba(26,127,212,0.3); border-radius:10px; padding:14px 16px; color:#fff; font-family:'Figtree',sans-serif; font-size:0.9rem; margin-bottom:20px; outline:none;"/>
+
+      <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:8px;">Email *</label>
+      <input type="email" name="email" placeholder="your.email@company.com" required
+        style="width:100%; background:#152240; border:1px solid rgba(26,127,212,0.3); border-radius:10px; padding:14px 16px; color:#fff; font-family:'Figtree',sans-serif; font-size:0.9rem; margin-bottom:20px; outline:none;"/>
+
+      <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:8px;">Company</label>
+      <input type="text" name="company" placeholder="Your company name"
+        style="width:100%; background:#152240; border:1px solid rgba(26,127,212,0.3); border-radius:10px; padding:14px 16px; color:#fff; font-family:'Figtree',sans-serif; font-size:0.9rem; margin-bottom:20px; outline:none;"/>
+
+      <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:8px;">Message *</label>
+      <textarea name="message" placeholder="Tell us about your project, questions, or how we can help..." required rows="5"
+        style="width:100%; background:#152240; border:1px solid rgba(26,127,212,0.3); border-radius:10px; padding:14px 16px; color:#fff; font-family:'Figtree',sans-serif; font-size:0.9rem; margin-bottom:28px; outline:none; resize:vertical;"></textarea>
+
+      <button type="submit"
+        style="width:100%; background:#00c9e4; border:none; border-radius:10px; padding:16px; color:#0b1528; font-family:'Figtree',sans-serif; font-weight:700; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
+        ✈ Send Message
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<script>
+  function openContact() {
+    const overlay = document.getElementById('contactOverlay');
+    overlay.style.display = 'flex';
+  }
+  function closeContact() {
+    const overlay = document.getElementById('contactOverlay');
+    overlay.style.display = 'none';
+  }
+  // Close when clicking outside the form
+  document.getElementById('contactOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeContact();
+  });
+</script>
 <script>
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
