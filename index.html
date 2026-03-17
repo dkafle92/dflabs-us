@@ -896,6 +896,66 @@
     if (e.target === this) closePrivacy();
   });
 </script>
+    <!-- LEADERSHIP POPUP -->
+<div id="leadershipOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#0f1e35; border:1px solid rgba(26,127,212,0.3); border-radius:20px; padding:52px; width:100%; max-width:900px; position:relative; max-height:90vh; overflow-y:auto;">
+
+    <!-- Close Button -->
+    <button onclick="closeLeadership()" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#8fa4c0; font-size:1.5rem; cursor:pointer;">✕</button>
+
+    <!-- Header -->
+    <p style="font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.15em; color:#3b9eff; text-transform:uppercase; margin-bottom:12px;">Our Leadership</p>
+    <h2 style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; margin-bottom:8px;">The Team Behind DF Labs</h2>
+    <p style="color:#8fa4c0; font-size:0.95rem; line-height:1.7; margin-bottom:40px;">Decades of combined experience solving complex data and technology challenges for enterprises across industries.</p>
+
+    <!-- Team Grid -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+
+      <!-- Dhiraj -->
+      <div style="background:#0b1528; border:1px solid rgba(26,127,212,0.3); border-radius:14px; padding:28px; display:flex; flex-direction:column;">
+        <div style="width:80px; height:80px; border-radius:50%; background:#152240; border:2px dashed rgba(26,127,212,0.4); display:grid; place-items:center; margin-bottom:16px; flex-shrink:0;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; margin-bottom:4px;">Dhiraj Kafle</h3>
+        <p style="font-family:'DM Mono',monospace; font-size:0.68rem; color:#3b9eff; letter-spacing:0.08em; margin-bottom:16px;">Founder & CEO</p>
+        <p style="font-size:0.82rem; color:#8fa4c0; line-height:1.75; flex:1;">Energetic digital product and transformation leader with 20+ years of experience across startups and Fortune 50 companies. Has consulted for State Farm, T-Mobile, Starbucks, Boeing, Accenture, and others. Holds a degree in Information & Decision Sciences from the University of Illinois at Chicago.</p>
+      </div>
+
+      <!-- Krish -->
+      <div style="background:#0b1528; border:1px solid rgba(26,127,212,0.3); border-radius:14px; padding:28px; display:flex; flex-direction:column;">
+        <div style="width:80px; height:80px; border-radius:50%; background:#152240; border:2px dashed rgba(26,127,212,0.4); display:grid; place-items:center; margin-bottom:16px; flex-shrink:0;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; margin-bottom:4px;">Krish Chaitanya</h3>
+        <p style="font-family:'DM Mono',monospace; font-size:0.68rem; color:#3b9eff; letter-spacing:0.08em; margin-bottom:16px;">VP – AI/ML & Cloud Infrastructure</p>
+        <p style="font-size:0.82rem; color:#8fa4c0; line-height:1.75; flex:1;">Seasoned technology executive with nearly 20 years of Fortune 500 experience across telecom, tech, and insurance. Executive MBA from NYU Stern. Has led at Samsung, T-Mobile, Verizon, and AT&T. Deep expertise in AI/ML, cloud platforms (Google, Azure, AWS), and large-scale digital transformation.</p>
+      </div>
+
+      <!-- Gary -->
+      <div style="background:#0b1528; border:1px solid rgba(26,127,212,0.3); border-radius:14px; padding:28px; display:flex; flex-direction:column;">
+        <div style="width:80px; height:80px; border-radius:50%; background:#152240; border:2px dashed rgba(26,127,212,0.4); display:grid; place-items:center; margin-bottom:16px; flex-shrink:0;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; margin-bottom:4px;">Gary Negi</h3>
+        <p style="font-family:'DM Mono',monospace; font-size:0.68rem; color:#3b9eff; letter-spacing:0.08em; margin-bottom:16px;">VP – Business Development</p>
+        <p style="font-size:0.82rem; color:#8fa4c0; line-height:1.75; flex:1;">20+ years of driven leadership in IT consulting with a rare ability to bridge complex technology and real business outcomes. Deeply technical yet business-focused — he speaks the language of both data and strategy, consistently delivering measurable results for clients.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function openLeadership() {
+    document.getElementById('leadershipOverlay').style.display = 'flex';
+  }
+  function closeLeadership() {
+    document.getElementById('leadershipOverlay').style.display = 'none';
+  }
+  document.getElementById('leadershipOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeLeadership();
+  });
+</script>
 </body>
 </html>
 <!-- POPUP OVERLAY -->
