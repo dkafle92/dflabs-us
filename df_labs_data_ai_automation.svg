@@ -90,5 +90,5 @@
   <text x="560" y="264" text-anchor="middle" font-family="Arial, sans-serif" font-size="7.5" font-weight="700" fill="#3b9eff" letter-spacing="1.5" style="fill:rgb(59, 158, 255);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Arial, sans-serif;font-size:7.5px;font-weight:700;text-anchor:middle;dominant-baseline:auto">WORKFLOWS | EFFICIENCY | EXECUTION</text>
 
   <!-- Bottom tagline -->
-  <text x="340" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#3d5270" letter-spacing="2" style="fill:rgb(61, 82, 112);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Arial, sans-serif;font-size:18px;font-weight:400;text-anchor:middle;dominant-baseline:auto">THE POWER OF INTELLIGENT SYSTEMS</text>
+  <text x="340" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#8fa4c0" letter-spacing="2" style="fill:rgb(61, 82, 112);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Arial, sans-serif;font-size:18px;font-weight:400;text-anchor:middle;dominant-baseline:auto">THE POWER OF INTELLIGENT SYSTEMS</text>
 </svg>
