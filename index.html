@@ -666,7 +666,7 @@
 <div id="capabilityOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:20px;">
   <div style="background:#0f1e35; border:1px solid rgba(26,127,212,0.3); border-radius:20px; padding:52px; width:100%; max-width:600px; position:relative;">
     <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, #1a7fd4, #00c9e4); border-radius:20px 20px 0 0;"></div>
-    <button onclick="closeCapability()" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#8fa4c0; font-size:1.5rem; cursor:pointer;">✕</button>
+   <button onclick="closePopup('capabilityOverlay')" style="position:absolute; top:16px; right:16px; background:#152240; border:1px solid rgba(26,127,212,0.3); color:#8fa4c0; font-size:1.2rem; cursor:pointer; z-index:9999; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; line-height:1;">✕</button>
     <div id="capabilityIcon" style="width:56px; height:56px; border-radius:14px; background:rgba(26,127,212,0.12); border:1px solid rgba(26,127,212,0.3); display:grid; place-items:center; margin-bottom:24px;"></div>
     <h2 id="capabilityTitle" style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; margin-bottom:16px;"></h2>
     <p id="capabilityText" style="font-size:0.95rem; color:#8fa4c0; line-height:1.85;"></p>
