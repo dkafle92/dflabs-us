@@ -662,7 +662,50 @@
     </div>
   </div>
 </section>
+<!-- CAPABILITIES POPUP -->
+<div id="capabilityOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#0f1e35; border:1px solid rgba(26,127,212,0.3); border-radius:20px; padding:52px; width:100%; max-width:600px; position:relative;">
+    <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, #1a7fd4, #00c9e4); border-radius:20px 20px 0 0;"></div>
+    <button onclick="closeCapability()" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#8fa4c0; font-size:1.5rem; cursor:pointer;">✕</button>
+    <div id="capabilityIcon" style="width:56px; height:56px; border-radius:14px; background:rgba(26,127,212,0.12); border:1px solid rgba(26,127,212,0.3); display:grid; place-items:center; margin-bottom:24px;"></div>
+    <h2 id="capabilityTitle" style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; margin-bottom:16px;"></h2>
+    <p id="capabilityText" style="font-size:0.95rem; color:#8fa4c0; line-height:1.85;"></p>
+  </div>
+</div>
 
+<script>
+  const capabilities = {
+    consulting: {
+      title: 'Business Consulting',
+      icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="1.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>',
+      text: 'We help enterprises cut through AI complexity by identifying the highest-value opportunities, building clear ROI frameworks, and aligning your data and AI strategy to deliver measurable, enterprise-wide impact — fast.'
+    },
+    genai: {
+      title: 'Generative AI',
+      icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>',
+      text: 'From concept to production, we design, deploy, and scale GenAI and Agentic AI solutions that integrate seamlessly into your existing workflows — turning cutting-edge technology into real efficiency gains and business results.'
+    },
+    dataeng: {
+      title: 'AI-Led Data Engineering',
+      icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>',
+      text: 'We build the modern, AI-ready data foundations your organization needs to move faster — automating pipelines, modernizing infrastructure, and enabling self-service access so your teams can act on insights and adopt Agentic AI with confidence.'
+    }
+  };
+
+  function openCapability(type) {
+    const cap = capabilities[type];
+    document.getElementById('capabilityTitle').textContent = cap.title;
+    document.getElementById('capabilityText').textContent = cap.text;
+    document.getElementById('capabilityIcon').innerHTML = cap.icon;
+    document.getElementById('capabilityOverlay').style.display = 'flex';
+  }
+  function closeCapability() {
+    document.getElementById('capabilityOverlay').style.display = 'none';
+  }
+  document.getElementById('capabilityOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeCapability();
+  });
+</script>
 <!-- SERVICES -->
 <section id="services">
   <div class="container">
