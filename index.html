@@ -1006,7 +1006,7 @@
         <h6>Company</h6>
         <ul>
           <li><a href="#mission">About DF Labs</a></li>
-          <li><a href="#cases">Case Studies</a></li>
+          <li><a href="#" onclick="openCases(); return false;">Case Studies</a></li>
           <li><a href="#engage">Engagement Models</a></li>
           <li><a href="#stack">Tech Stack</a></li>
         </ul>
@@ -1196,6 +1196,87 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+    <!-- CASE STUDIES POPUP -->
+<div id="casesOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#0f1e35; border:1px solid rgba(26,127,212,0.3); border-radius:20px; padding:52px; width:100%; max-width:960px; position:relative; max-height:90vh; overflow-y:auto;">
+    <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, #1a7fd4, #00c9e4); border-radius:20px 20px 0 0;"></div>
+    <button onclick="closeCases()" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#8fa4c0; font-size:1.5rem; cursor:pointer;">✕</button>
+
+    <p style="font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.15em; color:#3b9eff; text-transform:uppercase; margin-bottom:12px;">Case Studies</p>
+    <h2 style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; margin-bottom:8px;">Proven Impact in Complex,<br>Regulated Environments</h2>
+    <p style="color:#8fa4c0; font-size:0.95rem; line-height:1.7; margin-bottom:40px;">Real-world results across industries demonstrate our ability to deliver measurable outcomes.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+
+      <!-- Financial Services -->
+      <div style="background:#0b1528; border:1px solid rgba(26,127,212,0.3); border-radius:14px; overflow:hidden; display:flex; flex-direction:column;">
+        <div style="padding:28px 28px 20px; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <p style="font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:#3b9eff; margin-bottom:8px;">Financial Services</p>
+          <h3 style="font-size:1.05rem; font-weight:700;">Unified Mortgage Data &amp; Compliance Reporting</h3>
+        </div>
+        <div style="padding:24px 28px 0; flex:1;">
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8fa4c0; margin-bottom:8px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:14px; height:1px; background:#8fa4c0;"></span>Challenge</p>
+          <p style="font-size:0.85rem; color:#8fa4c0; line-height:1.7; margin-bottom:20px;">Disparate mortgage data across multiple systems creating reporting delays and compliance risks.</p>
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8fa4c0; margin-bottom:8px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:14px; height:1px; background:#8fa4c0;"></span>Solution</p>
+          <p style="font-size:0.85rem; color:#8fa4c0; line-height:1.7; margin-bottom:20px;">Built comprehensive data ingestion pipeline from Postgres, S3, SFTP, SQL Server, and Snowflake into Databricks. Implemented dbt transformations and Sigma Computing visualizations.</p>
+        </div>
+        <div style="background:#1a7fd4; padding:20px 28px;">
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:8px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:14px; height:1px; background:rgba(255,255,255,0.5);"></span>Impact</p>
+          <p style="color:#d0e8ff; font-size:0.875rem; font-weight:500;">Unified reporting, faster regulatory compliance, and improved decision-making speed.</p>
+        </div>
+      </div>
+
+      <!-- Hospitality -->
+      <div style="background:#0b1528; border:1px solid rgba(26,127,212,0.3); border-radius:14px; overflow:hidden; display:flex; flex-direction:column;">
+        <div style="padding:28px 28px 20px; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <p style="font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:#3b9eff; margin-bottom:8px;">Hospitality Industry</p>
+          <h3 style="font-size:1.05rem; font-weight:700;">Guest Data Transformation &amp; Personalization</h3>
+        </div>
+        <div style="padding:24px 28px 0; flex:1;">
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8fa4c0; margin-bottom:8px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:14px; height:1px; background:#8fa4c0;"></span>Challenge</p>
+          <p style="font-size:0.85rem; color:#8fa4c0; line-height:1.7; margin-bottom:20px;">Complex guest data requiring sophisticated transformation logic for operational insights.</p>
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8fa4c0; margin-bottom:8px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:14px; height:1px; background:#8fa4c0;"></span>Solution</p>
+          <p style="font-size:0.85rem; color:#8fa4c0; line-height:1.7; margin-bottom:20px;">Deployed dbt Core on Snowflake to create modular, tested transformation pipelines.</p>
+        </div>
+        <div style="background:#1a7fd4; padding:20px 28px;">
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:8px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:14px; height:1px; background:rgba(255,255,255,0.5);"></span>Impact</p>
+          <p style="color:#d0e8ff; font-size:0.875rem; font-weight:500;">Consistent metrics across properties and improved guest personalization capabilities.</p>
+        </div>
+      </div>
+
+      <!-- SaaS -->
+      <div style="background:#0b1528; border:1px solid rgba(26,127,212,0.3); border-radius:14px; overflow:hidden; display:flex; flex-direction:column;">
+        <div style="padding:28px 28px 20px; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <p style="font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:#3b9eff; margin-bottom:8px;">SaaS Platform</p>
+          <h3 style="font-size:1.05rem; font-weight:700;">Unified Product Analytics at Scale</h3>
+        </div>
+        <div style="padding:24px 28px 0; flex:1;">
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8fa4c0; margin-bottom:8px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:14px; height:1px; background:#8fa4c0;"></span>Challenge</p>
+          <p style="font-size:0.85rem; color:#8fa4c0; line-height:1.7; margin-bottom:20px;">Integrating data from diverse SaaS applications for unified product analytics.</p>
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8fa4c0; margin-bottom:8px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:14px; height:1px; background:#8fa4c0;"></span>Solution</p>
+          <p style="font-size:0.85rem; color:#8fa4c0; line-height:1.7; margin-bottom:20px;">Created scalable data pipelines leveraging REST APIs and JDBC connectors.</p>
+        </div>
+        <div style="background:#1a7fd4; padding:20px 28px;">
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:8px; display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:14px; height:1px; background:rgba(255,255,255,0.5);"></span>Impact</p>
+          <p style="color:#d0e8ff; font-size:0.875rem; font-weight:500;">Real-time product insights and accelerated feature development cycles.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function openCases() {
+    document.getElementById('casesOverlay').style.display = 'flex';
+  }
+  function closeCases() {
+    document.getElementById('casesOverlay').style.display = 'none';
+  }
+  document.getElementById('casesOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeCases();
+  });
 </script>
 </body>
 </html>
