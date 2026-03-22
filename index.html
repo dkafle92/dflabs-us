@@ -1065,7 +1065,27 @@
   <div style="background:#0f1e35; border:1px solid rgba(26,127,212,0.3); border-radius:20px; padding:52px; width:100%; max-width:900px; position:relative; max-height:90vh; overflow-y:auto;">
 
     <!-- Close Button -->
-    <button onclick="closePrivacy()" style="position:absolute; top:16px; right:16px; background:#152240; border:1px solid rgba(26,127,212,0.3); color:#8fa4c0; font-size:1.2rem; cursor:pointer; z-index:9999; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; line-height:1;">✕</button>
+    <button onclick="closePopup('leadershipOverlay')"
+```
+
+Also the nav link for Leadership probably still says the old function. Search for:
+```
+openLeadership
+```
+
+And change it to:
+```
+openPopup('leadershipOverlay')
+```
+
+Same for Case Studies — search for:
+```
+openCases
+```
+
+And change it to:
+```
+openPopup('casesOverlay')" style="position:absolute; top:16px; right:16px; background:#152240; border:1px solid rgba(26,127,212,0.3); color:#8fa4c0; font-size:1.2rem; cursor:pointer; z-index:9999; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; line-height:1;">✕</button>
     <!-- Header -->
     <p style="font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.15em; color:#3b9eff; text-transform:uppercase; margin-bottom:12px;">Our Leadership</p>
     <h2 style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; margin-bottom:8px;">The Team Behind DF Labs</h2>
