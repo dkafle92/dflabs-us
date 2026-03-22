@@ -1144,20 +1144,6 @@
 </div>
 
 <script>
-  function openContact() {
-    const overlay = document.getElementById('contactOverlay');
-    overlay.style.display = 'flex';
-  }
-  function closeContact() {
-    const overlay = document.getElementById('contactOverlay');
-    overlay.style.display = 'none';
-  }
-  // Close when clicking outside the form
-  document.getElementById('contactOverlay').addEventListener('click', function(e) {
-    if (e.target === this) closeContact();
-  });
-</script>
-<script>
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
   function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
@@ -1244,16 +1230,5 @@
   </div>
 </div>
 
-<script>
-  function openCases() {
-    document.getElementById('casesOverlay').style.display = 'flex';
-  }
-  function closeCases() {
-    document.getElementById('casesOverlay').style.display = 'none';
-  }
-  document.getElementById('casesOverlay').addEventListener('click', function(e) {
-    if (e.target === this) closeCases();
-  });
-</script>
 </body>
 </html>
