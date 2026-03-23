@@ -1161,13 +1161,12 @@ openPopup('casesOverlay')" style="position:absolute; top:16px; right:16px; backg
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
-   ok, so this?
- <!-- CASE STUDIES POPUP -->
+    <!-- CASE STUDIES POPUP -->
 <div id="casesOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+  <button onclick="document.getElementById('casesOverlay').style.display='none';" style="position:fixed; top:20px; right:20px; background:#1a7fd4; border:none; color:#fff; font-size:1.4rem; cursor:pointer; z-index:99999; width:40px; height:40px; border-radius:50%;">✕</button>
   <div style="background:#0f1e35; border:1px solid rgba(26,127,212,0.3); border-radius:20px; padding:52px; width:100%; max-width:960px; position:relative; max-height:90vh; overflow-y:auto;">
-    <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, #1a7fd4, #00c9e4); border-radius:20px 20px 0 0;"></div>
-    <button onclick="closePopup('casesOverlay')" style="position:absolute; top:16px; right:16px; background:#152240; border:1px solid rgba(26,127,212,0.3); color:#8fa4c0; font-size:1.2rem; cursor:pointer; z-index:9999; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; line-height:1;">✕</button>
-    <p style="font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.15em; color:#3b9eff; text-transform:uppercase; margin-bottom:12px;">Case Studies</p>
+    <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, #1a7fd4, #00c9e4); border-radius:20px 20px 0 0;"></div> 
+     <p style="font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.15em; color:#3b9eff; text-transform:uppercase; margin-bottom:12px;">Case Studies</p>
     <h2 style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; margin-bottom:8px;">Proven Impact in Complex,<br>Regulated Environments</h2>
     <p style="color:#8fa4c0; font-size:0.95rem; line-height:1.7; margin-bottom:40px;">Real-world results across industries demonstrate our ability to deliver measurable outcomes.</p>
 
