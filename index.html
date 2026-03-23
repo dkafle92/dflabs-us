@@ -225,7 +225,7 @@
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#mission">About</a></li>
-      <li><a href="#services">Services</a></li>
+      <li><a href="#" onclick="openPopup('offeringsOverlay'); return false;">Services</a></li>
       <li><a href="#engage">Engagement</a></li>
       <li><a href="#" onclick="openPopup('casesOverlay'); return false;">Case Studies</a></li>
       <li><a href="#" onclick="openPopup('leadershipOverlay'); return false;">Leadership</a></li>
@@ -868,5 +868,45 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
 </script>
+  <!-- SERVICES / OFFERINGS POPUP -->
+<div id="offeringsOverlay" class="popup-overlay">
+  <div class="popup-inner" style="max-width:900px;">
+    <button class="popup-close" onclick="closePopup('offeringsOverlay')">✕</button>
+    <div class="popup-body">
+      <p style="font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.15em; color:#3b9eff; text-transform:uppercase; margin-bottom:12px;">What We Offer</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; margin-bottom:40px;">Our Core Capabilities</h2>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+
+        <!-- Business Consulting -->
+        <div style="background:#0b1528; border:1px solid rgba(26,127,212,0.3); border-radius:14px; padding:32px;">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(26,127,212,0.1); border:1px solid rgba(26,127,212,0.3); display:grid; place-items:center; margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="1.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; margin-bottom:12px; color:#fff;">Business Consulting</h3>
+          <p style="font-size:0.85rem; color:#8fa4c0; line-height:1.8;">We help enterprises cut through AI complexity by identifying the highest-value opportunities, building clear ROI frameworks, and aligning your data and AI strategy to deliver measurable, enterprise-wide impact — fast.</p>
+        </div>
+
+        <!-- Generative AI -->
+        <div style="background:#0b1528; border:1px solid rgba(26,127,212,0.3); border-radius:14px; padding:32px;">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(26,127,212,0.1); border:1px solid rgba(26,127,212,0.3); display:grid; place-items:center; margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; margin-bottom:12px; color:#fff;">Generative AI</h3>
+          <p style="font-size:0.85rem; color:#8fa4c0; line-height:1.8;">From concept to production, we design, deploy, and scale GenAI and Agentic AI solutions that integrate seamlessly into your existing workflows — turning cutting-edge technology into real efficiency gains and business results.</p>
+        </div>
+
+        <!-- AI-Led Data Engineering -->
+        <div style="background:#0b1528; border:1px solid rgba(26,127,212,0.3); border-radius:14px; padding:32px;">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(26,127,212,0.1); border:1px solid rgba(26,127,212,0.3); display:grid; place-items:center; margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; margin-bottom:12px; color:#fff;">AI-Led Data Engineering</h3>
+          <p style="font-size:0.85rem; color:#8fa4c0; line-height:1.8;">We build the modern, AI-ready data foundations your organization needs to move faster — automating pipelines, modernizing infrastructure, and enabling self-service access so your teams can act on insights and adopt Agentic AI with confidence.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
