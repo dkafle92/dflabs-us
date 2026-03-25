@@ -1,1 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transform Your Data — DF Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400;500&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0b1528; --navy-mid: #0f1e35; --navy-light: #152240;
+      --blue: #1a7fd4; --blue-light: #3b9eff; --cyan: #00c9e4;
+      --white: #ffffff; --muted: #8fa4c0; --dim: #3d5270;
+      --border: rgba(255,255,255,0.08); --border-b: rgba(26,127,212,0.3);
+      --font-h: 'Playfair Display', Georgia, serif;
+      --font-b: 'Figtree', sans-serif;
+      --font-m: 'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-b);
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 120% 50% at 70% 10%, rgba(26,127,212,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 40% at 10% 80%, rgba(0,201,228,0.04) 0%, transparent 55%);
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1220px; margin: 0 auto; padding: 0 36px; position: relative; z-index: 1; }
 
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 24px 0;
+      background: rgba(11,21,40,0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.875rem; color: var(--muted);
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--white); }
+    .back-btn svg { width: 16px; height: 16px; }
+    .nav-logo { font-family: var(--font-b); font-weight: 700; font-size: 1.2rem; color: var(--white); }
+    .nav-cta {
+      background: var(--blue); color: #fff;
+      padding: 9px 22px; border-radius: 100px;
+      font-weight: 600; font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #1565b8; }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+    }
+    .page-label {
+      font-family: var(--font-m);
+      font-size: 0.72rem; letter-spacing: 0.16em;
+      color: var(--blue-light); text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .page-title {
+      font-family: var(--font-h);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .page-title span { color: var(--cyan); font-style: italic; }
+    .page-sub {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 580px; margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* SECTIONS */
+    .slide-section {
+      padding: 80px 0;
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .slide-section:first-of-type { border-top: none; }
+    .alt-bg { background: var(--navy-mid); }
+
+    .s-label {
+      font-family: var(--font-m); font-size: 0.7rem; letter-spacing: 0.15em;
+      color: var(--blue-light); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .s-title {
+      font-family: var(--font-h);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.01em; margin-bottom: 12px;
+    }
+    .s-title span { color: var(--cyan); }
+    .s-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.75; margin-bottom: 48px; max-width: 600px; }
+
+    /* SLIDE 1 — Compare grid */
+    .compare-grid { display: grid; grid-template-columns: 1fr 60px 1fr; align-items: center; gap: 0; }
+    .compare-card { border-radius: 14px; overflow: hidden; }
+    .compare-card.old { border: 1px solid rgba(255,255,255,0.1); background: #0a1628; }
+    .compare-card.new { border: 1px solid rgba(0,201,228,0.4); background: linear-gradient(135deg,#0d1f38,#0a1a30); }
+    .card-bar { height: 4px; }
+    .old .card-bar { background: rgba(255,255,255,0.1); }
+    .new .card-bar { background: linear-gradient(90deg, #1a7fd4, #00c9e4); }
+    .card-head { padding: 20px 24px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .card-head h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .old .card-head h4 { color: var(--muted); }
+    .new .card-head h4 { color: var(--white); }
+    .card-head p { font-size: 0.72rem; }
+    .old .card-head p { color: var(--dim); }
+    .new .card-head p { color: var(--blue-light); }
+    .row-item { display: flex; gap: 14px; align-items: flex-start; padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .row-item:last-child { border-bottom: none; }
+    .row-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .old .row-icon { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+    .new .row-icon { background: rgba(0,201,228,0.1); border: 1px solid rgba(0,201,228,0.2); }
+    .row-text strong { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 3px; }
+    .old .row-text strong { color: var(--muted); }
+    .new .row-text strong { color: var(--white); }
+    .row-text span { font-size: 0.75rem; color: var(--dim); line-height: 1.5; display: block; }
+    .new .row-text span { color: var(--muted); }
+    .arrows-col { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+    .arr { color: var(--blue-light); font-size: 1.6rem; line-height: 1; }
+
+    /* SLIDE 2 — Two col */
+    .two-col { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; }
+    .divider-v { background: rgba(26,127,212,0.2); }
+    .col-l { padding-right: 40px; }
+    .col-r { padding-left: 40px; }
+    .col-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
+    .badge-muted { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--muted); }
+    .badge-cyan { background: rgba(0,201,228,0.1); border: 1px solid rgba(0,201,228,0.3); color: var(--cyan); }
+    .col-title { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .graphic-box { background: #0a1628; border-radius: 10px; border: 1px solid var(--border-b); overflow: hidden; margin-bottom: 16px; }
+    .graphic-box svg { width: 100%; display: block; }
+    .col-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+
+    /* SLIDE 3 — 5C */
+    .five-c { display: grid; grid-template-columns: repeat(5,1fr); gap: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--border-b); }
+    .c-card { padding: 24px 18px 28px; position: relative; background: var(--navy-mid); border-right: 1px solid rgba(26,127,212,0.15); transition: background 0.3s; }
+    .c-card:last-child { border-right: none; }
+    .c-card:hover { background: var(--navy-light); }
+    .c-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--cyan)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+    .c-card:hover::before { transform: scaleX(1); }
+    .c-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; color: var(--dim); margin-bottom: 6px; }
+    .c-name { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .c-sub { font-size: 0.68rem; color: var(--blue-light); margin-bottom: 16px; }
+    .c-graphic { height: 110px; background: #0a1628; border-radius: 8px; margin-bottom: 16px; overflow: hidden; border: 1px solid rgba(26,127,212,0.15); }
+    .c-graphic svg { width: 100%; height: 100%; }
+    .c-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .c-arrow { position: absolute; right: -10px; top: 50%; transform: translateY(-50%); z-index: 2; color: var(--blue-light); font-size: 1.1rem; }
+
+    /* FOOTER */
+    .page-footer { padding: 48px 0; border-top: 1px solid var(--border); text-align: center; }
+    .page-footer p { font-size: 0.85rem; color: var(--dim); margin-bottom: 20px; }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+      padding: 14px 32px; border-radius: 100px;
+      font-weight: 600; font-size: 0.95rem;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #1565b8; transform: translateY(-2px); }
+
+    @media (max-width: 960px) {
+      .compare-grid { grid-template-columns: 1fr; }
+      .arrows-col { flex-direction: row; padding: 20px 0; }
+      .two-col { grid-template-columns: 1fr; }
+      .divider-v { width: 100%; height: 1px; margin: 32px 0; }
+      .col-l { padding-right: 0; }
+      .col-r { padding-left: 0; }
+      .five-c { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .five-c { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="back-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to DF Labs
+    </a>
+    <span class="nav-logo">DF Labs</span>
+    <a href="index.html#contact" class="nav-cta">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container">
+    <p class="page-label">Our Approach to Data Transformation</p>
+    <h1 class="page-title">Transform Your <span>Data</span><br>Into Competitive Intelligence</h1>
+    <p class="page-sub">Three frameworks that show exactly how DF Labs turns raw, scattered data into strategic business advantage.</p>
+  </div>
+</div>
+
+<!-- SLIDE 1: Looking Back vs Forward -->
+<section class="slide-section">
+  <div class="container">
+    <p class="s-label">The DF Labs Difference</p>
+    <h2 class="s-title">Traditional Scalability vs <span>DF Labs 5C Partnership</span></h2>
+    <p class="s-sub">The same challenges. A fundamentally different approach to solving them.</p>
+
+    <div class="compare-grid">
+      <!-- OLD -->
+      <div class="compare-card old">
+        <div class="card-bar"></div>
+        <div class="card-head">
+          <h4>Looking Back: Traditional Scalability</h4>
+          <p>How enterprises have always done it</p>
+        </div>
+        <div class="row-item">
+          <div class="row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3d5270" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="row-text"><strong>Sourcing</strong><span>Prolonged hiring cycles for in-house specialized talent.</span></div>
+        </div>
+        <div class="row-item">
+          <div class="row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3d5270" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="row-text"><strong>Architecture</strong><span>Siloed tech stacks prone to maintenance debt.</span></div>
+        </div>
+        <div class="row-item">
+          <div class="row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3d5270" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="row-text"><strong>Output</strong><span>Reactive dashboards telling you what already happened.</span></div>
+        </div>
+        <div class="row-item">
+          <div class="row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3d5270" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="row-text"><strong>Cost Profile</strong><span>High fixed overhead with slow time-to-value.</span></div>
+        </div>
+      </div>
+
+      <!-- ARROWS -->
+      <div class="arrows-col">
+        <span class="arr">›</span>
+        <span class="arr">›</span>
+        <span class="arr">›</span>
+        <span class="arr">›</span>
+      </div>
+
+      <!-- NEW -->
+      <div class="compare-card new">
+        <div class="card-bar"></div>
+        <div class="card-head">
+          <h4>Looking Forward: DF Labs 5C Partnership</h4>
+          <p>The smarter, faster, leaner alternative</p>
+        </div>
+        <div class="row-item">
+          <div class="row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c9e4" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="row-text"><strong>Sourcing</strong><span>Instant access to on-demand data engineers and ML experts.</span></div>
+        </div>
+        <div class="row-item">
+          <div class="row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c9e4" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="row-text"><strong>Architecture</strong><span>Seamlessly integrated Modern Data Stack — no silos, no debt.</span></div>
+        </div>
+        <div class="row-item">
+          <div class="row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c9e4" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div>
+          <div class="row-text"><strong>Output</strong><span>AI simulations mapping optimal future business outcomes.</span></div>
+        </div>
+        <div class="row-item">
+          <div class="row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c9e4" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+          <div class="row-text"><strong>Cost Profile</strong><span>50–70% cost savings with rapid, iterative ROI delivery.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2: Reactive vs Predictive -->
+<section class="slide-section alt-bg">
+  <div class="container">
+    <p class="s-label">Paradigm Shift</p>
+    <h2 class="s-title">From Reactive Storage to <span>Predictive Certainty</span></h2>
+    <p class="s-sub">Most data stacks tell you what happened. Ours tells you what to do next.</p>
+
+    <div class="two-col">
+      <div class="col-l">
+        <div class="col-badge badge-muted">Looking Back</div>
+        <div class="col-title">Traditional Data Stack</div>
+        <div class="graphic-box">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="200" fill="#060e1c"/>
+            <rect x="20" y="20" width="165" height="160" rx="4" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+            <text x="102" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#6b7a8d" letter-spacing="1">DATA SILO</text>
+            <rect x="35" y="100" width="10" height="55" rx="1" fill="#3a4a5e"/>
+            <rect x="50" y="82" width="10" height="73" rx="1" fill="#4a5a70"/>
+            <rect x="65" y="90" width="10" height="65" rx="1" fill="#3a4a5e"/>
+            <rect x="80" y="68" width="10" height="87" rx="1" fill="#5a6a80"/>
+            <rect x="95" y="85" width="10" height="70" rx="1" fill="#3a4a5e"/>
+            <rect x="110" y="60" width="10" height="95" rx="1" fill="#4a5a70"/>
+            <line x1="30" y1="155" x2="130" y2="155" stroke="#3a4a5e" stroke-width="0.5"/>
+            <text x="82" y="170" text-anchor="middle" font-family="Arial" font-size="6" fill="#4a5a70">HISTORICAL REPORT</text>
+            <rect x="135" y="55" width="42" height="40" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+            <polyline points="139,90 146,76 153,80 160,65 167,60 174,55" fill="none" stroke="#5a6a80" stroke-width="1.2"/>
+            <circle cx="139" cy="90" r="2" fill="#6b7a8d"/><circle cx="153" cy="80" r="2" fill="#6b7a8d"/><circle cx="167" cy="60" r="2" fill="#6b7a8d"/>
+            <text x="156" y="105" text-anchor="middle" font-family="Arial" font-size="6" fill="#4a5a70">PAST PERFORMANCE</text>
+            <rect x="215" y="20" width="165" height="160" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
+            <text x="297" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#6b7a8d" letter-spacing="1">ANALYTICAL NODE</text>
+            <polyline points="225,155 245,130 262,136 278,110 295,116 312,88 328,82 345,62 362,45" fill="none" stroke="#5a6a80" stroke-width="1.4"/>
+            <circle cx="225" cy="155" r="2.5" fill="#6b7a8d"/><circle cx="262" cy="136" r="2.5" fill="#6b7a8d"/><circle cx="295" cy="116" r="2.5" fill="#6b7a8d"/><circle cx="328" cy="82" r="2.5" fill="#6b7a8d"/><circle cx="362" cy="45" r="2.5" fill="#6b7a8d"/>
+            <text x="297" y="190" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#4a5a70">REACTIVE · BACKWARD LOOKING · NO PREDICTIVE POWER</text>
+          </svg>
+        </div>
+        <p class="col-desc">Siloed modern data stacks designed solely to tell you what has already happened — with no ability to forecast or guide future decisions.</p>
+      </div>
+
+      <div class="divider-v"></div>
+
+      <div class="col-r">
+        <div class="col-badge badge-cyan">Looking Forward</div>
+        <div class="col-title">Decision Architecture</div>
+        <div class="graphic-box">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="200" fill="#060e1c"/>
+            <rect x="155" y="82" width="90" height="36" rx="5" fill="rgba(59,158,255,0.2)" stroke="#3b9eff" stroke-width="1.2"/>
+            <text x="200" y="104" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">Present State</text>
+            <line x1="155" y1="90" x2="95" y2="55" stroke="#3a4a5e" stroke-width="4" stroke-linecap="round"/>
+            <line x1="155" y1="100" x2="70" y2="100" stroke="#3a4a5e" stroke-width="4" stroke-linecap="round"/>
+            <line x1="155" y1="110" x2="95" y2="148" stroke="#3a4a5e" stroke-width="4" stroke-linecap="round"/>
+            <line x1="245" y1="90" x2="305" y2="55" stroke="#3a4a5e" stroke-width="3" stroke-linecap="round"/>
+            <line x1="245" y1="100" x2="330" y2="100" stroke="#3a4a5e" stroke-width="3" stroke-linecap="round"/>
+            <line x1="245" y1="118" x2="360" y2="168" stroke="#00c9e4" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+            <rect x="335" y="154" width="52" height="34" rx="5" fill="#00c9e4"/>
+            <text x="361" y="167" text-anchor="middle" font-family="Arial" font-size="7" font-weight="700" fill="#0b1528">Optimized</text>
+            <text x="361" y="179" text-anchor="middle" font-family="Arial" font-size="7" font-weight="700" fill="#0b1528">Outcome</text>
+            <rect x="62" y="42" width="38" height="20" rx="3" fill="rgba(255,255,255,0.03)" stroke="#3a4a5e" stroke-width="0.8"/><text x="81" y="55" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#4a5a70">Risk</text>
+            <rect x="35" y="88" width="38" height="20" rx="3" fill="rgba(255,255,255,0.03)" stroke="#3a4a5e" stroke-width="0.8"/><text x="54" y="101" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#4a5a70">Delay</text>
+            <rect x="62" y="138" width="48" height="20" rx="3" fill="rgba(255,255,255,0.03)" stroke="#3a4a5e" stroke-width="0.8"/><text x="86" y="151" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#4a5a70">Suboptimal</text>
+            <rect x="296" y="42" width="52" height="20" rx="3" fill="rgba(255,255,255,0.03)" stroke="#3a4a5e" stroke-width="0.8"/><text x="322" y="55" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#4a5a70">Suboptimal</text>
+            <rect x="318" y="88" width="38" height="20" rx="3" fill="rgba(255,255,255,0.03)" stroke="#3a4a5e" stroke-width="0.8"/><text x="337" y="101" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#4a5a70">Risk</text>
+            <text x="200" y="195" text-anchor="middle" font-family="Arial" font-size="7" fill="#3d5270">AI SIMULATIONS · OPTIMIZED PATH · STRATEGIC ADVANTAGE</text>
+          </svg>
+        </div>
+        <p class="col-desc">Deploying AI simulations to forecast outcomes and engineer specific strategic advantages before they happen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: 5C Decision Architecture -->
+<section class="slide-section">
+  <div class="container">
+    <p class="s-label">DF Labs Framework</p>
+    <h2 class="s-title">The Engine: <span>5C Decision Architecture</span></h2>
+    <p class="s-sub">From scattered raw data to strategic business outcomes — five connected stages that transform how your organization operates.</p>
+
+    <div class="five-c">
+
+      <!-- C1 -->
+      <div class="c-card">
+        <div class="c-num">01</div>
+        <div class="c-name">Capture</div>
+        <div class="c-sub">Data Engineering</div>
+        <div class="c-graphic">
+          <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="110" fill="#060e1c"/>
+            <rect x="10" y="15" width="20" height="20" rx="2" fill="rgba(26,127,212,0.2)" stroke="#1a7fd4" stroke-width="0.8"/>
+            <rect x="35" y="10" width="20" height="20" rx="2" fill="rgba(26,127,212,0.15)" stroke="#1a7fd4" stroke-width="0.8" transform="rotate(-5 45 20)"/>
+            <rect x="60" y="18" width="20" height="20" rx="2" fill="rgba(59,158,255,0.2)" stroke="#3b9eff" stroke-width="0.8" transform="rotate(4 70 28)"/>
+            <rect x="85" y="12" width="20" height="20" rx="2" fill="rgba(26,127,212,0.15)" stroke="#1a7fd4" stroke-width="0.8"/>
+            <line x1="20" y1="35" x2="60" y2="58" stroke="#3b9eff" stroke-width="0.7" opacity="0.5"/>
+            <line x1="45" y1="30" x2="60" y2="58" stroke="#3b9eff" stroke-width="0.7" opacity="0.5"/>
+            <line x1="70" y1="38" x2="60" y2="58" stroke="#3b9eff" stroke-width="0.7" opacity="0.5"/>
+            <line x1="95" y1="32" x2="60" y2="58" stroke="#3b9eff" stroke-width="0.7" opacity="0.5"/>
+            <circle cx="60" cy="58" r="9" fill="#1a7fd4" opacity="0.9"/>
+            <circle cx="60" cy="58" r="5" fill="#3b9eff"/>
+            <line x1="60" y1="67" x2="60" y2="84" stroke="#3b9eff" stroke-width="1.5"/>
+            <circle cx="60" cy="88" r="5" fill="#00c9e4" opacity="0.9"/>
+            <text x="60" y="102" text-anchor="middle" font-family="Arial" font-size="5" fill="#3d5270">SOURCE OF TRUTH</text>
+          </svg>
+        </div>
+        <div class="c-desc">Scattered raw data funneled into a single source of truth.</div>
+        <div class="c-arrow">›</div>
+      </div>
+
+      <!-- C2 -->
+      <div class="c-card">
+        <div class="c-num">02</div>
+        <div class="c-name">Connect</div>
+        <div class="c-sub">Cloud Data Warehousing</div>
+        <div class="c-graphic">
+          <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="110" fill="#060e1c"/>
+            <ellipse cx="60" cy="32" rx="32" ry="11" fill="rgba(59,158,255,0.12)" stroke="#3b9eff" stroke-width="0.8"/>
+            <rect x="28" y="32" width="64" height="30" fill="rgba(59,158,255,0.08)" stroke="#3b9eff" stroke-width="0.8"/>
+            <ellipse cx="60" cy="62" rx="32" ry="11" fill="rgba(59,158,255,0.15)" stroke="#3b9eff" stroke-width="0.8"/>
+            <text x="60" y="49" text-anchor="middle" font-family="Arial" font-size="7" font-weight="700" fill="#3b9eff">WAREHOUSE</text>
+            <line x1="22" y1="18" x2="34" y2="28" stroke="#1a7fd4" stroke-width="0.8" opacity="0.6"/>
+            <line x1="60" y1="14" x2="60" y2="21" stroke="#1a7fd4" stroke-width="0.8" opacity="0.6"/>
+            <line x1="98" y1="18" x2="86" y2="28" stroke="#1a7fd4" stroke-width="0.8" opacity="0.6"/>
+            <rect x="13" y="10" width="17" height="11" rx="2" fill="rgba(26,127,212,0.15)" stroke="#1a7fd4" stroke-width="0.6"/>
+            <rect x="51" y="7" width="17" height="11" rx="2" fill="rgba(26,127,212,0.15)" stroke="#1a7fd4" stroke-width="0.6"/>
+            <rect x="90" y="10" width="17" height="11" rx="2" fill="rgba(26,127,212,0.15)" stroke="#1a7fd4" stroke-width="0.6"/>
+            <line x1="60" y1="73" x2="60" y2="84" stroke="#00c9e4" stroke-width="1.2"/>
+            <rect x="38" y="84" width="44" height="14" rx="3" fill="rgba(0,201,228,0.15)" stroke="#00c9e4" stroke-width="0.7"/>
+            <text x="60" y="93" text-anchor="middle" font-family="Arial" font-size="6" fill="#00c9e4">Snowflake · BigQuery</text>
+          </svg>
+        </div>
+        <div class="c-desc">Centralizing massive volumes into structured cloud environments.</div>
+        <div class="c-arrow">›</div>
+      </div>
+
+      <!-- C3 -->
+      <div class="c-card">
+        <div class="c-num">03</div>
+        <div class="c-name">Compute</div>
+        <div class="c-sub">Analytics Engineering</div>
+        <div class="c-graphic">
+          <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="110" fill="#060e1c"/>
+            <rect x="20" y="20" width="80" height="56" rx="5" fill="rgba(0,201,228,0.08)" stroke="#00c9e4" stroke-width="0.8"/>
+            <rect x="28" y="28" width="64" height="40" rx="3" fill="rgba(0,201,228,0.1)"/>
+            <rect x="34" y="34" width="52" height="28" rx="2" fill="rgba(0,201,228,0.15)"/>
+            <text x="60" y="51" text-anchor="middle" font-family="Arial" font-size="7" font-weight="700" fill="#00c9e4">dbt ENGINE</text>
+            <line x1="20" y1="36" x2="10" y2="36" stroke="#00c9e4" stroke-width="0.8"/>
+            <line x1="20" y1="46" x2="10" y2="46" stroke="#00c9e4" stroke-width="0.8"/>
+            <line x1="20" y1="56" x2="10" y2="56" stroke="#00c9e4" stroke-width="0.8"/>
+            <line x1="100" y1="36" x2="110" y2="36" stroke="#3b9eff" stroke-width="0.8"/>
+            <line x1="100" y1="46" x2="110" y2="46" stroke="#3b9eff" stroke-width="0.8"/>
+            <line x1="100" y1="56" x2="110" y2="56" stroke="#3b9eff" stroke-width="0.8"/>
+            <rect x="14" y="84" width="26" height="12" rx="2" fill="rgba(59,158,255,0.1)" stroke="#3b9eff" stroke-width="0.5"/><text x="27" y="92" text-anchor="middle" font-family="Arial" font-size="5.5" fill="#3b9eff">Tested</text>
+            <rect x="47" y="84" width="26" height="12" rx="2" fill="rgba(0,201,228,0.1)" stroke="#00c9e4" stroke-width="0.5"/><text x="60" y="92" text-anchor="middle" font-family="Arial" font-size="5.5" fill="#00c9e4">Versioned</text>
+            <rect x="80" y="84" width="26" height="12" rx="2" fill="rgba(26,127,212,0.1)" stroke="#1a7fd4" stroke-width="0.5"/><text x="93" y="92" text-anchor="middle" font-family="Arial" font-size="5.5" fill="#1a7fd4">Trusted</text>
+          </svg>
+        </div>
+        <div class="c-desc">Transforming raw pipelines into trustworthy, analysis-ready datasets.</div>
+        <div class="c-arrow">›</div>
+      </div>
+
+      <!-- C4 -->
+      <div class="c-card">
+        <div class="c-num">04</div>
+        <div class="c-name">Clarify</div>
+        <div class="c-sub">Agentic AI, ML/DL</div>
+        <div class="c-graphic">
+          <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="110" fill="#060e1c"/>
+            <circle cx="60" cy="50" r="30" fill="rgba(0,201,228,0.04)" stroke="#00c9e4" stroke-width="0.7" stroke-dasharray="3 3"/>
+            <circle cx="60" cy="32" r="5" fill="rgba(0,201,228,0.3)" stroke="#00c9e4" stroke-width="1"/>
+            <circle cx="40" cy="44" r="5" fill="rgba(0,201,228,0.3)" stroke="#00c9e4" stroke-width="1"/>
+            <circle cx="80" cy="44" r="5" fill="rgba(0,201,228,0.3)" stroke="#00c9e4" stroke-width="1"/>
+            <circle cx="35" cy="60" r="5" fill="rgba(59,158,255,0.4)" stroke="#3b9eff" stroke-width="1"/>
+            <circle cx="85" cy="60" r="5" fill="rgba(59,158,255,0.4)" stroke="#3b9eff" stroke-width="1"/>
+            <circle cx="48" cy="70" r="5" fill="rgba(0,201,228,0.3)" stroke="#00c9e4" stroke-width="1"/>
+            <circle cx="72" cy="70" r="5" fill="rgba(0,201,228,0.3)" stroke="#00c9e4" stroke-width="1"/>
+            <line x1="60" y1="37" x2="45" y2="44" stroke="rgba(0,201,228,0.3)" stroke-width="0.7"/>
+            <line x1="60" y1="37" x2="75" y2="44" stroke="rgba(0,201,228,0.3)" stroke-width="0.7"/>
+            <line x1="45" y1="49" x2="40" y2="60" stroke="rgba(59,158,255,0.3)" stroke-width="0.7"/>
+            <line x1="75" y1="49" x2="80" y2="60" stroke="rgba(59,158,255,0.3)" stroke-width="0.7"/>
+            <line x1="40" y1="65" x2="48" y2="70" stroke="rgba(0,201,228,0.3)" stroke-width="0.7"/>
+            <line x1="80" y1="65" x2="72" y2="70" stroke="rgba(0,201,228,0.3)" stroke-width="0.7"/>
+            <circle cx="60" cy="50" r="10" fill="rgba(0,201,228,0.2)" stroke="#00c9e4" stroke-width="1.2"/>
+            <text x="60" y="54" text-anchor="middle" font-family="Arial" font-size="6.5" font-weight="700" fill="#00c9e4">AI</text>
+            <text x="60" y="92" text-anchor="middle" font-family="Arial" font-size="5.5" fill="#3d5270">Hidden Patterns · Predictions</text>
+          </svg>
+        </div>
+        <div class="c-desc">Deploying AI to uncover hidden patterns and drive intelligent predictions.</div>
+        <div class="c-arrow">›</div>
+      </div>
+
+      <!-- C5 -->
+      <div class="c-card">
+        <div class="c-num">05</div>
+        <div class="c-name">Commit</div>
+        <div class="c-sub" style="color:var(--cyan);">Decision Architecture</div>
+        <div class="c-graphic" style="border-color:rgba(0,201,228,0.2);">
+          <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="110" fill="#060e1c"/>
+            <rect x="12" y="72" width="14" height="28" rx="2" fill="#1a7fd4" opacity="0.6"/>
+            <rect x="31" y="58" width="14" height="42" rx="2" fill="#3b9eff" opacity="0.7"/>
+            <rect x="50" y="46" width="14" height="54" rx="2" fill="#3b9eff" opacity="0.8"/>
+            <rect x="69" y="32" width="14" height="68" rx="2" fill="#00c9e4" opacity="0.9"/>
+            <rect x="88" y="18" width="14" height="82" rx="2" fill="#00c9e4"/>
+            <polyline points="19,70 38,56 57,44 76,30 95,16" fill="none" stroke="#00c9e4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polygon points="95,9 103,22 87,22" fill="#00c9e4"/>
+            <text x="60" y="106" text-anchor="middle" font-family="Arial" font-size="5.5" fill="#3d5270">Strategic Path · ROI Output</text>
+          </svg>
+        </div>
+        <div class="c-desc">Running predictive AI to output a clear strategic path and measurable ROI.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <div class="container">
+    <p>Ready to transform your data into competitive intelligence?</p>
+    <a href="index.html" onclick="setTimeout(()=>{document.getElementById('contactOverlay') && openPopup('contactOverlay')},500); return true;" class="btn-primary">
+      Book a Discovery Call
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</footer>
+
+</body>
+</html>
